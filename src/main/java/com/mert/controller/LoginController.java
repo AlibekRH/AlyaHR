@@ -21,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mert.model.User;
 import com.mert.service.UserService;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +50,16 @@ public class LoginController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
+	private static Connection getConnection() throws URISyntaxException, SQLException {
+		URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
 
+		String username = jdbUri.getUserInfo().split(":")[0];
+		String password = jdbUri.getUserInfo().split(":")[1];
+		String port = String.valueOf(jdbUri.getPort());
+		String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
+
+		return DriverManager.getConnection(jdbUrl, username, password);
+	}
 	@RequestMapping(value={"/index"}, method = RequestMethod.GET)
 	public ModelAndView index(){
 		ModelAndView modelAndView = new ModelAndView();

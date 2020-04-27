@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d26e129c-8b47-40ab-8f56-edb1a82c6be8" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - i5k5oziib8zequcc@jfrpocyduwfg38kq.chr7pe7iynqr.eu-west-1.rds.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - i5k5oziib8zequcc@jfrpocyduwfg38kq.chr7pe7iynqr.eu-west-1.rds.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ExecutionTargetDialog">
+    <checked>
+      <node key="f0ed653f-dbb1-433e-8aff-eb9c039d13be">
+        <node key="i5k5oziib8zequcc" />
+      </node>
+    </checked>
+    <expanded>
+      <node key="f0ed653f-dbb1-433e-8aff-eb9c039d13be" />
+    </expanded>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1b6KiztGzojtm022oKAUKTNnk9e" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="BootsecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="bootsecurity" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mert.BootsecurityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d26e129c-8b47-40ab-8f56-edb1a82c6be8" name="Default Changelist" comment="" />
+      <created>1587947236488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587947236488</updated>
+      <workItem from="1587947257001" duration="1641000" />
+    </task>
+    <task id="LOCAL-00001" summary="AA">
+      <created>1587948819155</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587948819155</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="AA" />
+    <option name="LAST_COMMIT_MESSAGE" value="AA" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="344" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587948773685">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="344" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587948773685" />
+    <state x="326" y="7" key="CommitChangelistDialog2" timestamp="1587948817177">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="326" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587948817177" />
+    <state x="569" y="115" key="ExecutionTargetDialog" timestamp="1587948354456">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="569" y="115" key="ExecutionTargetDialog/0.0.1536.824@0.0.1536.824" timestamp="1587948354456" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1587948622087">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587948622087" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1587948622086">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587948622086" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1587948622086">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587948622086" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1587948622086">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587948622086" />
+    <state width="1493" height="210" key="GridCell.Tab.1.bottom" timestamp="1587948622087">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587948622087" />
+    <state width="1493" height="210" key="GridCell.Tab.1.center" timestamp="1587948622087">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587948622087" />
+    <state width="1493" height="210" key="GridCell.Tab.1.left" timestamp="1587948622087">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587948622087" />
+    <state width="1493" height="210" key="GridCell.Tab.1.right" timestamp="1587948622087">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587948622087" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1587947286381">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587947286381" />
+  </component>
+</project>

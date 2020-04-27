@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ПРЕПОДАВАТЕЛЬСКИЙ СОСТАВ</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/css/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a th:href="@{/home}" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>H</b>RS</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg" th:utext="${auth.role.role}"> </span>
+
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="/images/avatar5.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs" th:utext="${auth.name}"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="/images/avatar5.png" class="img-circle" alt="User Image">
+
+                                <p>
+                                    <span class="hidden-xs" th:utext="${auth.name}"></span>
+                                    <small><span class="hidden-xs" th:utext="${auth.email}"></span></small>
+                                </p>
+                            </li>z
+                            <!-- Menu Body --
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a th:href="@{/myprofile/inf}" class="btn btn-primary btn-flat">Profile</a>
+                                </div>
+                                <div class="col-xs-offset-1 col-xs-4 text-center">
+                                    <a  th:href="@{/myprofile/change_password(id=${auth.id})}"><i class="fa fa-gears"></i> Change
+                                        Password</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a th:href="@{/logout}" class="btn btn-danger btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+   		<section class="sidebar">
+			<ul class="sidebar-menu">
+				<li class="treeview">
+					<a th:href="@{/home}">
+						<i class="fa fa-home text-yellow"></i> <span>Домой</span>
+						<span class="pull-right-container">
+            </span>
+					</a>
+				</li>
+				<li th:if="${control != 'ADMIN'}" class="treeview">
+					<a th:href="@{/myprofile/mytasks(id=${auth.id})}">
+						<i class="fa fa-file-text text-green"></i> <span>Мои задачи</span>
+						<span class="pull-right-container">
+            </span>
+					</a>
+				</li>
+				<li th:if="${control != 'ADMIN'}" class="treeview">
+					<a th:href="@{/myprofile/inf}">
+						<i class="fa fa-gears text-blue"></i> <span>Настройки профиля</span>
+						<span class="pull-right-container">
+            </span>
+					</a>
+				</li>
+                <li class="treeview">
+                    <a th:href="@{/users/all}">
+                        <i class="fa fa-users text-green"></i>
+                        <span>Личный состав</span>
+                    </a>
+                </li>
+				<li th:if="${control == 'ADMIN'}" class="treeview">
+					<a href="#">
+						<i class="fa fa-odnoklassniki text-blue"></i>
+						<span>Преподавательский <br> состав</span>
+						<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a th:href="@{/admin/tasks/new}" ><i
+								class="fa fa-plus"></i> Добавить</a></li>
+						<li><a th:href="@{/admin/tasks/all}" ><i
+								class="fa fa-plus"></i> Посмотреть</a></li>
+					</ul>
+				</li>
+
+				<li th:if="${control == 'ADMIN'}" class="treeview">
+					<a href="#">
+						<i class="fa fa-files-o text-purple"></i>
+						<span>Tasks</span>
+						<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/admin/tasks/new}"><i class="fa fa-plus"></i> New Task</a></li>
+                        <li><a th:href="@{/admin/tasks/all}"><i class="fa fa-file-text"></i> All Tasks</a></li>
+                    </ul>
+                </li>
+                <li th:if="${control == 'ADMIN'}" class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop text-red "></i>
+                        <span>User-Task Management</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right "></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/admin/user-task/new}"><i class="fa fa-laptop"></i> Task Assignment</a>
+                        </li>
+                        <li><a th:href="@{/admin/user-task/all}"><i class="fa fa-files-o"></i> User Tasks</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div th:if="${mode == 'MODE_ALL'}">
+                <section class="content-header">
+                    <h1>
+                        Преподавательский состав
+                        <small>таблица</small>
+                    </h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Отчество</th>
+                                            <th>Дата рождения</th>
+                                             <th>Дата добавления</th>
+                                            <th></th>
+                                       		<th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="task : ${tasks}">
+                                            <td th:text="${task.name}"></td>
+                                       		<td th:text="${task.surname}"></td>
+                                            <td th:text="${task.patronymic}"></td>
+                                              <td th:text="${task.birthday}"></td>
+                                             <td th:text="${task.dateCreated}"></td> 
+                                                <td><a th:href="@{/admin/tasks/new(id=${task.id})}"><span
+                                                    class="glyphicon glyphicon-pencil"></span> Новый</a></td>
+                                            <td><a th:href="@{/admin/tasks/update(id=${task.id})}"><span
+                                                    class="glyphicon glyphicon-pencil"></span> ИЗМЕНИТЬ</a></td>
+                                            <td><a th:href="@{/admin/tasks/delete(id=${task.id})}"><span
+                                                    class="glyphicon glyphicon-trash"></span> УДАЛИТЬ</a></td>
+                                            <td><a th:href="@{/admin/tasks/per_inf(id=${task.id})}"><span
+                                                    class="glyphicon glyphicon-user"></span> ИНФОРМАЦИЯ</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+            </div>
+            <div th:if="${mode == 'MODE_UPDATE'}">
+                <div class="container">
+                    <div class="row">
+                        <form autocomplete="off" action="#" th:action="@{/admin/tasks/save}"
+                              th:object="${task}" method="post" class="form-horizontal"
+                              role="form">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>Edit Task</legend>
+                                <!-- Text input-->
+                                <input type="hidden" name="id" th:field="${task.id}"/>
+                                <div class="form-group">
+                                
+                                    <label class="col-md-4 control-label" for="textinput">Task
+                                        Name</label>
+                                    <div class="col-md-4">
+                                        <input type="text" th:field="${task.name}" placeholder="Name"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                                       <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Task
+                                        Name</label>
+                                    <div class="col-md-4">
+                                        <input type="text" th:field="${task.surname}" placeholder="Name"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Отчество</label>
+                                    <div class="col-md-4">
+                                        <input type="text" th:field="${task.patronymic}"
+                                               placeholder="Отчество" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Статус сотрудника</label>
+                                    <div class="col-md-4 text-left">
+                                        <input type="radio" class="col-sm-1" name="finished"
+                                               value="активен"/>
+                                        <div class="col-sm-2">Yes</div>
+                                        <input type="radio" class="col-md-1" name="finished"
+                                               value="не активен"/>
+                                        <div class="col-sm-2">Не активен</div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Button (Double) -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="submitButton"></label>
+                                    <div class="col-md-8">
+                                        <button type="submit" id="submitButton" name="submitButton"
+                                                class="btn btn-success">Сохранить
+                                        </button>
+                                        <button type="button" class="btn btn-inverse"
+                                                onclick="window.history.back()">Отменить
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${mode == 'MODE_NEW'}">
+                <div class="container">
+                    <div class="row">
+                        <form autocomplete="off" action="#" th:action="@{/admin/tasks/save}"
+                              th:object="${task}" method="post" class="form-horizontal"
+                              role="form">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>Новый сотрудник</legend>
+                                <!-- Text input-->       
+     
+				<div class="container">
+    		<div class="tabs">
+		 <div id="content-1">
+                            <div class="validation-form">
+                                
+                                 <div class="vali-form-group">
+                                  <h3>Личные данные</h3>
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Имя*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" title="Employee ID" value=""  class="form-control" placeholder="Имя" th:field="${task.name}">
+                                 </div>
+                            </div>
+                              </div>
+   
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Фамилия*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" title="Employee ID" value="" class="form-control" placeholder="Фамилия" th:field="${task.surname}">
+                                 </div>
+                            </div>
+                      
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Отчество*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Отчество" th:field="${task.patronymic}">
+                                 </div>
+                            </div>
+                                </div>
+
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+						              <label class="control-label">Дата рождения*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control" th:field="${task.birthday}">
+						              </div>
+						            </div>
+						
+						            <div class="col-md-4 control-label">
+						              <label class="control-label">Табельный номер*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-user" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" name="mname" title="Middel Name" class="form-control" placeholder="Табельный номер" th:field="${task.tabelnum}">
+						              </div>
+						            </div>
+						
+						   			  <div class="col-md-4 control-label">
+						              <label class="control-label">Место рождения*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-male" aria-hidden="true"></i>
+						              </span>
+						              <select name="gender" title="Gender" th:field="${task.placebirth}" style="padding: 5px 5px;text-transform: capitalize;width: 305px;height: 34px;">
+						                <option th:value="${p}" th:each="p: ${countryObject}" th:text="${p}"></option>  
+						                </select>         
+						              </div>
+						            </div>
+						              <div class="clearfix"> </div>
+						            </div>
+					
+						<!-- - -->
+                                </div>
+						<!--  -->
+						 <div class="validation-form">
+                                 <div class="vali-form-group">                  
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Пол*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+               <select name="gender" title="Gender" th:field="${task.gender}" style="padding: 5px 5px;text-transform: capitalize;width: 305px;height: 34px;">
+						                <option th:value="${p}" th:each="p: ${genderObject}" th:text="${p}"></option>  
+						                </select> 
+                                 </div>
+                            </div>
+                              </div>
+    	 	
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Семейное положение*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+        <select name="gender" title="Gender" th:field="${task.status}" style="padding: 5px 5px;text-transform: capitalize;width: 305px;height: 34px;">
+						                <option th:value="${p}" th:each="p: ${familyObject}" th:text="${p}"></option>  
+						                </select> 
+                                 </div>
+                            </div>
+                            
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Образование*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Образование" th:field="${task.education}">
+                                 </div>
+                            </div>
+                               
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">ИИН*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="ИИН" th:field="${task.iin}">
+                                 </div>
+                            </div>
+                            
+                                      <div class="col-md-4 control-label">
+				              <label class="control-label">Изображение профиля*</label>
+				              <div class="input-group">             
+				                  <span class="input-group-addon">
+				              <i class="fa fa-picture-o" aria-hidden="true"></i>
+				              </span>
+				              <input type="file" name="pfimg" title="Изображение профиля" class="form-control" name="fileupload"  >
+				              </div>
+				            </div>
+                                </div>
+						              <div class="clearfix"> </div>
+						              
+						<!-- - -->
+                                </div>
+						<!--  -->
+						<div class="validation-form">
+						     <h3 style="margin-top: 5px">Телефоны</h3>
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Домашний телефон*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Домашний телефон" th:field="${task.telephone}">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Рабочий*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control" th:field="${task.telwork}">
+						              </div>
+						            </div>	
+						                       <div class="col-md-4 control-label">
+						              <label class="control-label">Мобильный*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="Мобильный" class="form-control" th:field="${task.mobile}">
+						              </div>
+						            </div>	
+						              <div class="clearfix"> </div>
+						            </div>
+								
+						    
+						
+						
+						        
+						            
+						            </div>
+						            		  <div class="validation-form">
+                                
+                                 <div class="vali-form-group">
+                                  <h3 style="margin-top: 5px">Паспортные данные</h3>
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Документ*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" title="Employee ID" value="" class="form-control" placeholder="Документ" th:field="${task.document}">
+                                 </div>
+                            </div>
+                              </div>
+    
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Серия*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" title="Employee ID" value="" class="form-control" placeholder="Серия" th:field="${task.seria}">
+                                 </div>
+                            </div>
+                            
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Номер документа*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Номер документа" th:field="${task.numdoc}">
+                                 </div>
+                            </div>
+                                </div>
+
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Кем выдан документ*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Кем выдан документ" th:field="${task.isdoc}">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Дата выдачи*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control" th:field="${task.isdate}">
+						              </div>
+						            </div>
+						
+						       		       <div class="col-md-4 control-label">
+						              <label class="control-label">Годен до*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control" th:field="${task.undate}">
+						              </div>
+						            </div>
+						              <div class="clearfix"> </div>
+						            </div>
+								
+						    	 <div class="vali-form-group">
+						           	        <div class="col-md-4 control-label">
+						              <label class="control-label">Национальность*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-map-marker" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" name="mname" title="Middel Name" class="form-control" placeholder="Национальность" th:field="${task.national}">
+						              </div>
+						            </div>
+						
+						
+						                   <div class="col-md-4 control-label">
+						              <label class="control-label">Гражданство*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-globe" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" name="mname" title="Middel Name" class="form-control" placeholder="Гражданство" th:field="${task.citizenship}">
+						              </div>
+						              
+						            </div>
+						            
+						            </div>
+						            
+						            
+						              <div class="clearfix"> </div>
+						            	
+						            
+						          
+						          
+						            
+									
+						          
+						<!-- - -->
+                                </div>
+							<!-- - -->
+									<div class="validation-form">
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Адрес прописки*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" title="Employee ID"  class="form-control" placeholder="Кем выдан документ">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Адрес проживания*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control">
+						              </div>
+						            </div>		
+						              <div class="clearfix"> </div>
+						            </div>
+
+						            </div>
+						            
+      </div>
+      <div id="content-2">
+        Содержимое 2...    
+      </div>
+      <div id="content-3">
+        Содержимое 3...
+      </div>
+    <div id="content-4">
+        Содержимое 4...    
+      </div>
+      <div id="content-5">
+        Содержимое 5...
+      </div>    
+      <div id="content-6">
+        Содержимое 6...    
+      </div>
+      <div id="content-7">
+        Содержимое 7...
+      </div>
+      <div class="tabs__links">
+        <a href="#content-1">Личные данные</a>
+        <a href="#content-2">Работа</a>
+        <a href="#content-3">Стаж</a>
+        <a href="#content-4">Семья и родственники</a>
+        <a href="#content-5">Оброзование</a>
+        <a href="#content-6">Воинский учет</a>
+        <a href="#content-7">Мед.книжка</a>
+      </div>
+    </div>
+
+  </div>
+  
+  
+  
+         
+						     
+						
+						
+ 			
+	
+						
+			
+                                
+							<!-- - -->
+                                <!-- Button (Double) -->
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="submitButton"></label>
+                                    <div class="col-md-8">
+                                        <button type="submit" id="submtButton" name="submitButton"
+                                                class="btn btn-success">Сохранить
+                                        </button>
+                                        <button type="button" class="btn btn-inverse"
+                                                onclick="window.history.back()">Отменить
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${mode == 'MODE_INF'}">
+                <section class="content-header">
+                    <h2>
+                        Информация
+                    </h2>
+                    <!-- /.box-header -->
+                 
+                </section>
+
+                <!-- Main content -->
+                <section class="content" th:each="tasks : ${task}">
+           
+                    <!-- /.row -->
+                    <div class="container">
+    		<div class="tabs">
+     		 <div id="content-1">
+                            <div class="validation-form">
+                                
+                                 <div class="vali-form-group">
+                                  <h3>Личные данные</h3>
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Имя*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly title="Employee ID" value=""  class="form-control" placeholder="Имя"  th:field="${task.name} ">
+                                 </div>
+                            </div>
+                              </div>
+    
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Фамилия*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly title="Employee ID"  value="" class="form-control" placeholder="Фамилия" th:field="${task.surname}">
+                                 </div>
+                            </div>
+                            
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Отчество*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Отчество" th:field="${task.patronymic}">
+                                 </div>
+                            </div>
+                                </div>
+
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+						              <label class="control-label">Дата рождения*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control" th:field="${task.birthday}">
+						              </div>
+						            </div>
+						
+						            <div class="col-md-4 control-label">
+						              <label class="control-label">Табельный номер*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-user" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Табельный номер" th:field="${task.tabelnum}">
+						              </div>
+						            </div>
+						
+						       		          <div class="col-md-4 control-label">
+						              <label class="control-label">Место рождения*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-map-marker" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Место рождения" th:field="${task.placebirth}">
+						              </div>
+						            </div>
+						              <div class="clearfix"> </div>
+						            </div>
+								
+						    	 <div class="vali-form-group">
+						           	        <div class="col-md-4 control-label">
+						              <label class="control-label">Национальность*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-map-marker" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Национальность" th:field="${task.national}">
+						              </div>
+						            </div>
+						
+						
+						                   <div class="col-md-4 control-label">
+						              <label class="control-label">Гражданство*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-globe" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Гражданство" th:field="${task.citizenship}">
+						              </div>
+						              
+						            </div>						           
+						            </div>
+
+						              <div class="clearfix"> </div>
+						<!-- - -->
+                                </div>
+						<!--  -->
+						 <div class="validation-form">
+                                 <div class="vali-form-group">                  
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Пол*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly readonly title="Employee ID" value=""  class="form-control" placeholder="Пол">
+                                 </div>
+                            </div>
+                              </div>
+    
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Семейное положение*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly title="Employee ID" value="" class="form-control" placeholder="Семейное положение">
+                                 </div>
+                            </div>
+                            
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Образование*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Образование" >
+                                 </div>
+                            </div>
+                               
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">ИИН*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="ИИН">
+                                 </div>
+                            </div>
+                            
+                                      <div class="col-md-4 control-label">
+				              <label class="control-label">Изображение профиля*</label>
+				              <div class="input-group">             
+				                  <span class="input-group-addon">
+				              <i class="fa fa-picture-o" aria-hidden="true"></i>
+				              </span>
+				              <input type="file" readonly readonly name="pfimg" title="Изображение профиля" class="form-control" name="fileupload" th:field="${task.pic}" >
+				              </div>
+				            </div>
+                                </div>
+						              <div class="clearfix"> </div>
+						              
+						<!-- - -->
+                                </div>
+						<!--  -->
+						<div class="validation-form">
+						     <h3 style="margin-top: 5px">Телефоны</h3>
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Домашний телефон*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Домашний телефон">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Рабочий*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control">
+						              </div>
+						            </div>	
+						                       <div class="col-md-4 control-label">
+						              <label class="control-label">Мобильный*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="Мобильный" class="form-control">
+						              </div>
+						            </div>	
+						              <div class="clearfix"> </div>
+						            </div>
+								
+						    
+						
+						
+						        
+						            
+						            </div>
+						            		  <div class="validation-form">
+                                
+                                 <div class="vali-form-group">
+                                  <h3 style="margin-top: 5px">Паспортные данные</h3>
+                          		<div class="vali-form-group">
+         						 <div class="col-md-4 control-label">
+             					 <label class="control-label">Документ*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly title="Employee ID" value="" class="form-control" placeholder="Документ">
+                                 </div>
+                            </div>
+                              </div>
+    
+                            <div class="col-md-4 control-label">
+             					 <label class="control-label">Серия*</label>
+            				       <div class="input-group">             
+                                     <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                  <input type="text" readonly title="Employee ID" value="" class="form-control" placeholder="Серия" >
+                                 </div>
+                            </div>
+                            
+                                		 <div class="col-md-4 control-label">
+             					 <label class="control-label">Номер документа*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Номер документа" >
+                                 </div>
+                            </div>
+                                </div>
+
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Кем выдан документ*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Кем выдан документ">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Дата выдачи*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control">
+						              </div>
+						            </div>
+						
+						       		       <div class="col-md-4 control-label">
+						              <label class="control-label">Годен до*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control">
+						              </div>
+						            </div>
+						              <div class="clearfix"> </div>
+						            </div>
+								
+						    	 <div class="vali-form-group">
+						           	        <div class="col-md-4 control-label">
+						              <label class="control-label">Национальность*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-map-marker" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Национальность">
+						              </div>
+						            </div>
+						
+						
+						                   <div class="col-md-4 control-label">
+						              <label class="control-label">Гражданство*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-globe" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly name="mname" title="Middel Name" class="form-control" placeholder="Гражданство">
+						              </div>
+						              
+						            </div>
+						            
+						            </div>
+						            
+						            
+						              <div class="clearfix"> </div>
+						            	
+						            
+						          
+						          
+						            
+									
+						          
+						<!-- - -->
+                                </div>
+							<!-- - -->
+									<div class="validation-form">
+							<div class="vali-form-group">
+					
+						            <div class="col-md-4 control-label">
+             					 <label class="control-label">Адрес прописки*</label>
+            				     <div class="input-group">             
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-user" aria-hidden="true"></i>
+                             </span>
+                        <input type="text" readonly title="Employee ID"  class="form-control" placeholder="Кем выдан документ">
+                                 </div>
+                            </div>
+						
+						                 <div class="col-md-4 control-label">
+						              <label class="control-label">Адрес проживания*</label>
+						              <div class="input-group">             
+						                  <span class="input-group-addon">
+						              <i class="fa fa-calendar" aria-hidden="true"></i>
+						              </span>
+						              <input type="text" readonly id="Birthdate" title="Birth Date" name="bdate" placeholder="1998.12.21" class="form-control">
+						              </div>
+						            </div>		
+						              <div class="clearfix"> </div>
+						            </div>
+
+						            </div>
+						            
+      </div>
+      <div id="content-2">
+        Содержимое 2...    
+      </div>
+      <div id="content-3">
+        Содержимое 3...
+      </div>
+    <div id="content-4">
+        Содержимое 4...    
+      </div>
+      <div id="content-5">
+        Содержимое 5...
+      </div>    
+      <div id="content-6">
+        Содержимое 6...    
+      </div>
+      <div id="content-7">
+        Содержимое 7...
+      </div>
+      <div class="tabs__links">
+        <a href="#content-1">Личные данные</a>
+        <a href="#content-2">Работа</a>
+        <a href="#content-3">Стаж</a>
+        <a href="#content-4">Семья и родственники</a>
+        <a href="#content-5">Оброзование</a>
+        <a href="#content-6">Воинский учет</a>
+        <a href="#content-7">Мед.книжка</a>
+      </div>
+    </div>
+
+  </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- /.content -->
+    </div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="/js/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+
+<!-- SlimScroll -->
+<script src="/js/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/js/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/js/demo.js"></script>
+<!-- page script -->
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            "ordering": false
+        });
+        $('#table2').DataTable();
+    });
+</script>
+</body>
+</html>

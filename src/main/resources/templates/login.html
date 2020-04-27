@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8">
+    <title>Login page</title>
+<link rel="stylesheet" th:href="@{/css/log.css}" />
+</head>
+<body>
+              <form class="box" th:action="@{/login}" method="POST">
+                  <h2>Доброo пожаловать</h2>
+                  <input type="text" name="email" th:placeholder="Логин">
+                    <input type="password" name="password" th:placeholder="Пароль">
+                     <div align="center" th:if="${param.error}">
+                                        <p style="font-size: 20; color: #FF1C19;">Неверный адрес почты или пароль, пожалуйста, повторите</p>
+                                    </div>
+                  <input type="Submit" name="Submit" value="Войти">
+                  
+            </form>
+ 
+</body>
+</html>
